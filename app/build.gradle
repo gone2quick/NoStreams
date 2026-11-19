@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId 'com.pcstream.viewer'
-        minSdk 29            // Android 10+
+        minSdk 26            // Android 8.0+
         targetSdk 34
         versionCode 1
         versionName '1.0'
