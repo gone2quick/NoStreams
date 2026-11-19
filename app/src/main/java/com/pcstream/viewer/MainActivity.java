@@ -5,6 +5,9 @@ import android.app.DownloadManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
@@ -97,6 +100,13 @@ public class MainActivity extends Activity {
 
         // the player's "MP4" download links
         web.setDownloadListener((url, userAgent, contentDisposition, mimeType, length) -> {
+            // Android 8-9 needs storage permission to write into Downloads
+            if (Build.VERSION.SDK_INT <= 28
+                    && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                Toast.makeText(this, "Allow storage access, then tap download again", Toast.LENGTH_LONG).show();
+                return;
+            }
             try {
                 DownloadManager.Request req = new DownloadManager.Request(Uri.parse(url));
                 String cookie = CookieManager.getInstance().getCookie(url);
