@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">NoStream</string>
     <!-- the only thing you need to change if the server address changes -->
-    <string name="server_url">https://server.tail1be5a7.ts.net</string>
+    <string name="server_url">https://nostreams.tail1be5a7.ts.net</string>
 </resources>
