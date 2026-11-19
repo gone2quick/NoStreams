@@ -86,7 +86,7 @@ public class MainActivity extends Activity {
                 root.addView(view, new FrameLayout.LayoutParams(
                         ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
                 root.setKeepScreenOn(true);
-                setImmersive(true);
+                applyImmersive(true);   // <-- renamed (was setImmersive)
             }
 
             @Override
@@ -120,7 +120,8 @@ public class MainActivity extends Activity {
         }
     }
 
-    private void setImmersive(boolean on) {
+    // <-- renamed (was setImmersive, which clashed with Activity.setImmersive)
+    private void applyImmersive(boolean on) {
         int flags = on
                 ? View.SYSTEM_UI_FLAG_FULLSCREEN | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                   | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -135,9 +136,9 @@ public class MainActivity extends Activity {
         customView = null;
         web.setVisibility(View.VISIBLE);
         root.setKeepScreenOn(false);
-        setImmersive(false);
+        applyImmersive(false);   // <-- renamed (was setImmersive)
         if (customCallback != null) {
-            customCallback.onCustomViewHidden();
+            customCallback.onHideCustomView();
             customCallback = null;
         }
     }
